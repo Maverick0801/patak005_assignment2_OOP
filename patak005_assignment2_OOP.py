@@ -17,7 +17,7 @@ class Alchemist:
         self.__magic = 0
         self.__ranged = 0
         self.__necromacy = 0
-        self.__laboratory = [] ## do i write this self.__laboratory = Laboratory() to show the compostiotn relationship
+        self.__laboratory = Laboratory() ## do i write this self.__laboratory = Laboratory() to show the compostiotn relationship
         self.__recipes = {}
     
     def getLaboratory(self):
@@ -26,7 +26,7 @@ class Alchemist:
         return self.__laboratory
 
     def getRecipes(self):
-        self.__recipes
+        return self.__recipes
 
     def mixPosition(self):
         pass
@@ -48,10 +48,13 @@ class Laboratory:
         self.__herbs = []
         self.__catalysts = []
 
-    def mixPotions(self):
-        pass
+    def mixPotions(self, name, type, stat, primaryIngrediant, secondaryIngrediant):
+       # if isinstance(primaryIngrediant, ):
+            # retTURN 
+        ## IF isinstance(secondayIngrediant, )
+        pass 
 
-    def addReagent(self):
+    def addReagent(self, reagent, amount):
         pass
 
 
@@ -68,16 +71,15 @@ class Potion(ABC):
     
     @abstractmethod
     def getName(self):
-        return self.__name ## abstract class pass methods
+        pass #return self.__name ## abstract class pass methods
         
-
     @abstractmethod
     def getStat(self):
-        return self.__stat ## abstract class pass methods
+        pass#return self.__stat ## abstract class pass methods
 
     @abstractmethod
     def getBoost(self):
-        return self.__boost ## abstract class pass methods 
+        pass# return self.__boost ## abstract class pass methods 
 
     @abstractmethod
     def setBoot(self, boost):
@@ -95,11 +97,11 @@ class Reagent(ABC):
     
     @abstractmethod
     def getName(self):     ## abstract class pass method
-        return self.__name 
+        pass
 
     @abstractmethod
     def getPotency(self):  ## abstract class pass method
-        return self.__potency
+        pass
 
     @abstractmethod
     def setPotency(self, potency):
@@ -112,14 +114,39 @@ class SuperPotion(Potion):
         self.__herb = []
         self.__catalyst = [] 
 
-    def calculateBoost(self):
-        pass
+    def getName(self):
+        return self.__name
+
+    potion_Name = property(getName)
+
+    def getStat(self):
+        return self.__stat
+
+    potion_stat = property(getStat)
+
+    def getBoost(self):
+        return self.__boost
+        
+    def setBoost(self, boost):
+        pass 
+
+    Boost = property(getBoost, setBoost)
+
+
+    def calculateBoost(self, herb_potency, catalyst_potency, catalyst_quality):
+        # Calculate the boost for SuperPotion
+        boost = herb_potency + (catalyst_potency * catalyst_quality) * 1.5
+        return round(boost, 2)  # Round the result to 2 decimals
 
     def getHerb(self):
         return self.__herb 
+    
+    Herb = property(getHerb)
 
     def getCatalyst(self):
         return self.__catalyst
+    
+    Catalayst = property(getCatalyst)
 
 
 class ExtremePotion(Potion):
@@ -128,14 +155,36 @@ class ExtremePotion(Potion):
         self.__reagent = []
         self.__potion = []
 
+    def getName(self):
+        return self.__name
+
+    potion_Name = property(getName)
+
+    def getStat(self):
+        return self.__stat
+
+    potion_stat = property(getStat)
+
+    def getBoost(self):
+        return self.__boost
+        
+    def setBoost(self, boost):
+        pass 
+
+    Boost = property(getBoost, setBoost)
+
     def calculateBoost(self):
         pass
 
     def getReagent(self):
         return self.__reagent
+    
+    Reagent = property(getReagent)
 
     def getPotion(self):
         return self.__potion
+    
+    Potion = property(getPotion)
 
 
 
@@ -144,26 +193,62 @@ class Herb(Reagent):
         super().__init__(name, potency)
         self.__grimy = True
 
+
+    def getName(self):     
+        return self.__name
+    
+    reagent_name = property(getName)
+    
+    def getPotency(self):  
+        return self.__potency
+    
+    def setPotency(self, potency):
+        self.__potency += potency
+
+    reagent_potency = property(getPotency, setPotency)
+
+
     def refine(self):
         pass
+
 
     def getGrimy(self):
         return self.__grimy
 
     def setGrimy(self, grimmy):
-        pass
+        if grimmy == True:
+            return self.__grimy
 
+    Grimy = property(getGrimy, setGrimy)
 
 class Catalayst(Reagent):
     def __init__(self, name, potency, quality ):
         super().__init__(name, potency)
         self.__quality = quality
 
+
+    def getName(self):     
+        return self.__name
+    
+    reagent_name = property(getName)
+    
+    def getPotency(self):  
+        return self.__potency
+    
+    def setPotency(self, potency):
+        self.__potency += potency
+
+    reagent_potency = property(getPotency, setPotency)
+
+
     def refine(self):
         pass
 
+
     def getQuality(self):
         return self.__quality
+    
+    Quality = property(getQuality)
 
     
 
