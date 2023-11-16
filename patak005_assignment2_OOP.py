@@ -216,8 +216,9 @@ class Herb(Reagent):
         return self.__grimy
 
     def setGrimy(self, grimmy):
-        if grimmy == True:
-            return self.__grimy
+        if grimmy == False:
+            print("yolo")
+        return self.__grimy 
 
     Grimy = property(getGrimy, setGrimy)
 
