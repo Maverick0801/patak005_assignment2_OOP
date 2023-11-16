@@ -7,17 +7,26 @@ EmailID: patak005@mymail.unisa.edu.au
 This is my own work as defined by the University's Academic Misconduct Policy.
 
 """
-
+from abc import ABC, abstractmethod
 
 class Alchemist:
     def __init__(self):
-        pass
+        self.__attack = 0 ## int 
+        self.__strength = 0
+        self.__defense = 0
+        self.__magic = 0
+        self.__ranged = 0
+        self.__necromacy = 0
+        self.__laboratory = [] ## do i write this self.__laboratory = Laboratory() to show the compostiotn relationship
+        self.__recipes = {}
     
     def getLaboratory(self):
-        pass
+        # do i show the composition relationsip here
+        ## labboatory = Laboratory()
+        return self.__laboratory
 
     def getRecipes(self):
-        pass
+        self.__recipes
 
     def mixPosition(self):
         pass
@@ -35,7 +44,9 @@ class Alchemist:
 
 class Laboratory:
     def __init__(self):
-        pass
+        self.__potions = []
+        self.__herbs = []
+        self.__catalysts = []
 
     def mixPotions(self):
         pass
@@ -45,95 +56,114 @@ class Laboratory:
 
 
 
-class Potion:
-    def __init__(self):
-        pass
+class Potion(ABC):
+    def __init__(self, name, stat, boost):
+        self.__name = name 
+        self.__stat = stat
+        self.__boost = boost
 
+    @abstractmethod
     def calculateBoost(self):
         pass
-
+    
+    @abstractmethod
     def getName(self):
-        pass
+        return self.__name ## abstract class pass methods
+        
 
-    def getStall(self):
-        pass
+    @abstractmethod
+    def getStat(self):
+        return self.__stat ## abstract class pass methods
 
+    @abstractmethod
     def getBoost(self):
+        return self.__boost ## abstract class pass methods 
+
+    @abstractmethod
+    def setBoot(self, boost):
         pass
 
-    def setBoot(self):
-        pass
 
+class Reagent(ABC):
+    def __init__(self, name, potency):
+        self.__name = name
+        self.__potency = potency 
 
-class Reagent:
-    def __init__(self):
-        pass
-
+    @abstractmethod
     def refine(self):
         pass
+    
+    @abstractmethod
+    def getName(self):     ## abstract class pass method
+        return self.__name 
 
-    def getName(self):
-        pass
+    @abstractmethod
+    def getPotency(self):  ## abstract class pass method
+        return self.__potency
 
-    def getPotency(self):
-        pass
-
-    def setPotency(self):
+    @abstractmethod
+    def setPotency(self, potency):
         pass
 
 
 class SuperPotion(Potion):
-    def __init__(self):
-        pass
+    def __init__(self, name, stat, boost,):
+        super().__init__(name, stat, boost)
+        self.__herb = []
+        self.__catalyst = [] 
 
     def calculateBoost(self):
         pass
 
     def getHerb(self):
-        pass
+        return self.__herb 
 
     def getCatalyst(self):
-        pass
+        return self.__catalyst
 
 
 class ExtremePotion(Potion):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, name, stat, boost, ):
+        super().__init__(name, stat, boost)
+        self.__reagent = []
+        self.__potion = []
 
     def calculateBoost(self):
-        return super().calculateBoost()
-    
-    def getReagent(self):
         pass
 
+    def getReagent(self):
+        return self.__reagent
+
     def getPotion(self):
-        pass
+        return self.__potion
 
 
 
 class Herb(Reagent):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, name, potency):
+        super().__init__(name, potency)
+        self.__grimy = True
 
     def refine(self):
         pass
 
     def getGrimy(self):
-        pass
+        return self.__grimy
 
-    def setGrimy(self):
+    def setGrimy(self, grimmy):
         pass
 
 
 class Catalayst(Reagent):
-    def __init__(self):
-        pass
+    def __init__(self, name, potency, quality ):
+        super().__init__(name, potency)
+        self.__quality = quality
 
     def refine(self):
         pass
 
     def getQuality(self):
-        pass
+        return self.__quality
 
     
 
