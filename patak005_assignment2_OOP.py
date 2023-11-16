@@ -1,5 +1,13 @@
-## getters -- return 
-##
+""" 
+File: filename.py
+Description: There is only one file containing all the code, consisting of all the classes updated from the class diagram. Class Materials is not changed and enough docstrings are provided to ecplain the code functionality
+Author: Aum Patel
+StudentID: 110100110
+EmailID: patak005@mymail.unisa.edu.au
+This is my own work as defined by the University's Academic Misconduct Policy.
+
+"""
+
 
 class Alchemist:
     def __init__(self):
