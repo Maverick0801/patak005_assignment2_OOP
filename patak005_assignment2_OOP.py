@@ -71,15 +71,15 @@ class Potion(ABC):
     
     @abstractmethod
     def getName(self):
-        pass #return self.__name ## abstract class pass methods
+        pass
         
     @abstractmethod
     def getStat(self):
-        pass#return self.__stat ## abstract class pass methods
+        pass
 
     @abstractmethod
     def getBoost(self):
-        pass# return self.__boost ## abstract class pass methods 
+        pass 
 
     @abstractmethod
     def setBoot(self, boost):
@@ -96,12 +96,11 @@ class Reagent(ABC):
         pass
     
     @abstractmethod
-    def getName(self):     ## abstract class pass method
+    def getName(self):    
         pass
 
     @abstractmethod
-    def getPotency(self):  ## abstract class pass method
-        pass
+    def getPotency(self):  
 
     @abstractmethod
     def setPotency(self, potency):
@@ -117,12 +116,12 @@ class SuperPotion(Potion):
     def getName(self):
         return self.__name
 
-    potion_Name = property(getName)
+    #potion_Name = property(getName)
 
     def getStat(self):
         return self.__stat
 
-    potion_stat = property(getStat)
+   # potion_stat = property(getStat)
 
     def getBoost(self):
         return self.__boost
@@ -158,12 +157,12 @@ class ExtremePotion(Potion):
     def getName(self):
         return self.__name
 
-    potion_Name = property(getName)
+    #potion_Name = property(getName)
 
     def getStat(self):
         return self.__stat
 
-    potion_stat = property(getStat)
+    #potion_stat = property(getStat)
 
     def getBoost(self):
         return self.__boost
@@ -179,12 +178,12 @@ class ExtremePotion(Potion):
     def getReagent(self):
         return self.__reagent
     
-    Reagent = property(getReagent)
+    #Reagent = property(getReagent)
 
     def getPotion(self):
         return self.__potion
     
-    Potion = property(getPotion)
+    #Potion = property(getPotion)
 
 
 
@@ -197,7 +196,7 @@ class Herb(Reagent):
     def getName(self):     
         return self.__name
     
-    reagent_name = property(getName)
+   # reagent_name = property(getName)
     
     def getPotency(self):  
         return self.__potency
@@ -249,7 +248,7 @@ class Catalayst(Reagent):
     def getQuality(self):
         return self.__quality
     
-    Quality = property(getQuality)
+    #Quality = property(getQuality)
 
     
 
