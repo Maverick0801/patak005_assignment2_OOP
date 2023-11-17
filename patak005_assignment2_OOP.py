@@ -8,8 +8,8 @@ This is my own work as defined by the University's Academic Misconduct Policy.
 from abc import ABC, abstractmethod
 
 """
-The alchemist class orchestrates and is responsible for collecting the ragents, mixing the potions, and drinking the potions, it does all of this in the laboratory and it has a composition relationship which is shown in the initializer # self.__laboratory = Laboratory()
-The recipe dictionary is already provided in the assignment specification and all of the attributes from attack to necromacy are values between 0 and 100
+The alchemist class orchestrates and is responsible for collecting the reagents, mixing the potions, and drinking the potions, it does all of this in the laboratory and it has a composition relationship which is shown in the initializer # self.__laboratory = Laboratory()
+The recipe dictionary is already provided in the assignment specification and all of the attributes from attack to necromacy are values between 0 and 100. The alchemists first collects the reagents and add them to the respective list, it then mixes the potion and potion is removed from the list and then it drinks the potion and attributes such as self.__attack is changed. This is hardcoded a bit in the drink potion() method
 """
 class Alchemist:
     def __init__(self):
@@ -89,7 +89,7 @@ class Laboratory:
 
 
 
-    " The addReafent method is resposnible in appending the self.__herbs and self.__catalyst lists which are defined in the initializer. It checks whether the reagent is part of the Herb or Catalyst class and based on that it puts them in the specific list by using isinstance() but before appending them to their respective this the amount of potency is set to both the herb and the catalyst "
+    " The addReagent method is resposnible in appending the self.__herbs and self.__catalyst lists which are defined in the initializer. It checks whether the reagent is part of the Herb or Catalyst class and based on that it puts them in the specific list by using isinstance() but before appending them to their respective this the amount of potency is set to both the herb and the catalyst "
 
     def addReagent(self, reagent, amount):
         if isinstance(reagent, Herb):
@@ -101,7 +101,8 @@ class Laboratory:
     
 
 """
-The potion class is abstract class 
+The potion class is abstract class which is also the parent class of SuperPotion and ExtremePotion. This abstract class describes attributes and methoods of different kinds of potions. 
+It includes abstract methods to calculate and access attributes like stat, boost, and name. This class defines the specific potion behaviors that are inherited by subclasses such as SuperPotion and ExtremePotion. 
 
 """
 
@@ -132,8 +133,9 @@ class Potion(ABC):
         pass
 
 """
-The reagent class is another abstract class 
-
+The reagent class is another abstract class which is also a parent class to Hebs and Catlyst. 
+This abstract class also controls reagent methods and attributes. It has abstract methods to access and refine attributes such as name and potency.
+and has 2 subclasses like Herb and Catalyst, which used methods and inherits it from the parent class.
 
 """
 class Reagent(ABC):
@@ -158,7 +160,8 @@ class Reagent(ABC):
         pass
 
 """
-The superpotion class 
+The SuperPotion class managers super potions and uses calculateBoost() to boost user stats. This calculation provided in the assignment specification calculates the potencies of herbs and catalysts, amplifying them by 1.5 times, providing notable stat gains. 
+It contains enhancing qualities that are essential for imporiving user stats. The getName , getStat, getBoost, setBoost are all inherited from the abstract class and the getters and setters can be accessed via properties such as Boost defined in the class below
 """
 class SuperPotion(Potion):
     def __init__(self, name, stat, boost,):
@@ -197,7 +200,8 @@ class SuperPotion(Potion):
     Catalayst = property(getCatalyst)
 
 """
-The Extreme Potion class does 
+Extreme potions are contained in the ExtremePotion class which has two private attributes defined as lists within the initializer. self.__reagent = [], and self.__potions = [] apart from the other attributes it inherits from the abstract class Potion.
+, which uses calculateBoost to boost user statistics tenfold. By using this technique, the combined effect of the reagent and potion potencies is tripled. Its boosting methods and attributes allow for strong stat augmentation, which is essential to alchemical mixtures for exceptional user enhancement.
 
 """
 class ExtremePotion(Potion):
@@ -232,7 +236,12 @@ class ExtremePotion(Potion):
     def getPotion(self):
         return self.__potion
 
-""" The Herb class """
+"""
+ The Herb class he Herb class represents the basic attributes  and methods of herbs.
+ These classes include attributes inherited from their parent class whcih is Reagent, but apart from it has another private attribute named grimmmy ehihc returns a bollean value of True and False, grimmy is already True in the paramter, there are grimys in the herbs, but in the refine method the grimy is set to false,  and the potency has been multiplied by 2.5 times as given in the assignment specfication.
+ Apart from this it has getGrimmy() which returns whether girmmy = False or grimmy =True and setsGrimmy() which sets the grimmy and to access both these getters and setters a property has been created   Every instance of the Herb class contains unique attributes, like a name, a potency level that indicates how effective it is, and a status that indicates how refined or grimy it is. 
+ 
+ """
 
 class Herb(Reagent):
     def __init__(self, name, potency = 0, grimy = True):
@@ -267,7 +276,8 @@ class Herb(Reagent):
 
 
 """
-The catalyst class
+The Catalyst class is the embodiment of a reagent, inheriting various attributes from its parent class such as name and potency. Besides this, lity, and name. It provides ways to get the name and strength, adjust the strength, and find the current quality level. Its refine method, which improves the catalyst's quality, plays a crucial role and refines() using the calculations specified in the assignment specifications.
+Enhancement is indicated by a 1.1 level of increase if the current quality is less than 8.9. But if the quality gets to 8.9 or higher, it peaks at 10, which is the ideal level of refinement. In essence, this class is a type of reagent that is put through a quality refinement process, which produces different effects in the alchemical system depending on the quality level of the reagent.
 
 """
 
