@@ -11,14 +11,20 @@ from abc import ABC, abstractmethod
 
 class Alchemist:
     def __init__(self):
-        self.__attack = 0 ## int 
+        self.__attack = 0 
         self.__strength = 0
         self.__defense = 0
         self.__magic = 0
         self.__ranged = 0
         self.__necromacy = 0
         self.__laboratory = Laboratory() ## do i write this self.__laboratory = Laboratory() to show the compostiotn relationship
-        self.__recipes = {}
+        self.__recipes = { (Super Attack:Irit, Eye of Newt), 
+                            (Super Strength:Kwuarm, Limpwurt Root) 
+                            (Super Defence: Cadantine, White Berries), 
+                            (Super Magic: Lantadme, Potato Cactus), 
+                            (Super Ranging: Dwarf Weed, Wine Of Zamrok), 
+                            (Super Necromancy: Arbuck, Blood of Orcus),
+                            (Extreme Attack : Avantoe, Super Attack)}
     
     def getLaboratory(self):
         # do i show the composition relationsip here
@@ -251,4 +257,6 @@ class Catalayst(Reagent):
     #Quality = property(getQuality)
 
     
+
+alchemist = Alchemist()
 
