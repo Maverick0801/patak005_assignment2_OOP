@@ -37,27 +37,34 @@ class Alchemist:
 
     
     def getLaboratory(self):
-        # do i show the composition relationsip here
-        ## labboatory = Laboratory()
         return self.__laboratory
 
     def getRecipes(self):
         return self.__recipes
 
     def mixPotion(self, recipes):
-        pass
-    ## recipe = self.__recipes.get(potion_name)
-       # if recipe:
-         #   self.__laboratory.mixPotions(recipe[0], recipe[1]) 
+        pass 
 
     def drinkPotion(self, potion):
         pass
 
-    def collectReagents(self, reagant, amount):  ## amount i think so refers to the potency 
-        return self.__potions.append(reagant, amount)
+
+    """ This is the first step that the Alchemist triggers and performs in the laboratry"""
+
+    def collectReagents(self, reagent, amount):  
+       self.__laboratory.addReagent(reagent, amount)
+
+    """ This is the last step that the Alchemist triggers """
 
     def refineReagents(self):
-        pass
+        herbs = self.__laboratory.getHerbs()  
+        catalysts = self.__laboratory.getCatalysts()  
+        
+        for herb in herbs:
+            herb.refine()
+        
+        for catalyst in catalysts:
+            catalyst.refine()
 
 """"
  The laboratory class
@@ -71,11 +78,11 @@ class Laboratory:
 
 
     """ The mixPotions method does this  """
-    def mixPotions(self, name, type, stat, primaryIngrediant, secondaryIngrediant):
-       # if isinstance(primaryIngrediant, ):
-            # retTURN 
-        ## IF isinstance(secondayIngrediant, )
+
+
+    def mixPotions(self, name, stat, primary, secondary):
         pass 
+
 
 
     """ The addReafent method does this """
@@ -87,8 +94,7 @@ class Laboratory:
         if isinstance(reagent, Catalyst):
             reagent.setPotency(amount) 
             self.__catalysts.append(reagent)
-        elif not isinstance(reagent, Herb) or isinstance(reagent, Catalyst):
-            raise ValueError(" Error! The reagent does not belong to the catalyst or the Herb class")
+    
 
 """
 Thw potion class is abstract class 
@@ -324,22 +330,23 @@ ground_miasma_rune = Catalyst("Ground Miasma Rune", 3.3, 5.2)
 
 """ I have created a small output code of how the Alchemist Game runs """
 
-## first creating a instance in alchemist class.
+# first creating a instance in alchemist class.
 alchemist = Alchemist()
 
-## first step it does is it collects the reagents which are added in the potions list in the laboratory
-alchemist.collectReagents("irit", "eye_of_newt")
+# ## first step it does is it collects the reagents 
+alchemist.collectReagents("Irit", "Eye of Newt")
+print("The reagents collected are: ")
 
-## second thing is that it mixes the potions and 
-alchemist.mixPotion()
+# Alchemist then proceeds to mix the potion
+alchemist.mixPotion("Super Attack")
+print("Potion is mixed.")
 
-## print out the list of potions
-laboratory = Laboratory ()
-#laboratory(.get().get())
+# Drinking the potion
+# alchemist.drinkPotion(potion)
+# print("Potion drunk.")
 
-alchemist.drinkPotion()
+# Alchemist refine the reagents
+# alchemist.refineReagents()
+print("Reagents refined.")
 
-## print out the potion list again to remove it
-
-alchemist.refineReagents()
 
