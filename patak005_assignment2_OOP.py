@@ -53,6 +53,7 @@ class Alchemist:
 
     def collectReagents(self, reagent, amount):  
        self.__laboratory.addReagent(reagent, amount)
+       self.__potions.append(reagent)
 
     """ This is the last step that the Alchemist triggers """
 
@@ -231,9 +232,9 @@ class ExtremePotion(Potion):
 """ The Herb class """
 
 class Herb(Reagent):
-    def __init__(self, name, potency):
+    def __init__(self, name, potency = 0, grimy = True):
         super().__init__(name, potency)
-        self.__grimy = True
+        self.__grimy = grimy
 
     def getName(self):     
         return self.__name
@@ -251,15 +252,13 @@ class Herb(Reagent):
     def refine(self):
         self.__potency *= 2.5  
         self.__grimy = False 
-        print(f"{self.__name} has been refined. New potency: {self.__potency}. It's no longer grimy.")
+        print(f"{self.__name} has been refined. The new potency: {self.__potency}. it is not grimy !")
 
     def getGrimy(self):
         return self.__grimy
 
-    def setGrimy(self, grimmy):
-        if grimmy == False:
-            print("yolo")
-        return self.__grimy 
+    def setGrimy(self, grimy):
+        self.__grimy = grimy  
 
     Grimy = property(getGrimy, setGrimy)
 
