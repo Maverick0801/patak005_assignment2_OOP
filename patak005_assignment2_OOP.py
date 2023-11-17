@@ -8,7 +8,8 @@ This is my own work as defined by the University's Academic Misconduct Policy.
 from abc import ABC, abstractmethod
 
 """
-The alchemist class orchestrates and is responsible for collecting the ragents, mixing the potions, and drinking the potions, it does all of this in the laboratory and it has a composition relationship which is shown in the initializer # self.__labora
+The alchemist class orchestrates and is responsible for collecting the ragents, mixing the potions, and drinking the potions, it does all of this in the laboratory and it has a composition relationship which is shown in the initializer # self.__laboratory = Laboratory()
+The recipe dictionary is already provided in the assignment specification and all of the attributes from attack to necromacy are values between 0 and 100
 """
 class Alchemist:
     def __init__(self):
@@ -56,6 +57,9 @@ class Alchemist:
         pass
 
 
+""""""
+
+""""""
 
 class Laboratory:
     def __init__(self):
