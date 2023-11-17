@@ -59,10 +59,9 @@ class Alchemist:
     def refineReagents(self):
         pass
 
-
-""""""
-
-""""""
+""""
+ The laboratory class
+ """
 
 class Laboratory:
     def __init__(self):
@@ -70,17 +69,31 @@ class Laboratory:
         self.__herbs = []
         self.__catalysts = []
 
+
+    """ The mixPotions method does this  """
     def mixPotions(self, name, type, stat, primaryIngrediant, secondaryIngrediant):
        # if isinstance(primaryIngrediant, ):
             # retTURN 
         ## IF isinstance(secondayIngrediant, )
         pass 
 
+
+    """ The addReafent method does this """
+
     def addReagent(self, reagent, amount):
-        pass
+        if isinstance(reagent, Herb):
+            reagent.setPotency(amount)  
+            self.__herbs.append(reagent)
+        if isinstance(reagent, Catalyst):
+            reagent.setPotency(amount) 
+            self.__catalysts.append(reagent)
+        elif not isinstance(reagent, Herb) or isinstance(reagent, Catalyst):
+            raise ValueError(" Error! The reagent does not belong to the catalyst or the Herb class")
 
-## Doubt 1 - where do i establish that all the attributes ranging from attack to necromancy are from 0 to 100 not more than that not less then that
+"""
+Thw potion class is abstract class 
 
+"""
 
 class Potion(ABC):
     def __init__(self, name, stat, boost):
@@ -108,7 +121,11 @@ class Potion(ABC):
     def setBoot(self, boost):
         pass
 
+"""
+The reagent class is another abstract class 
 
+
+"""
 class Reagent(ABC):
     def __init__(self, name, potency):
         self.__name = name
@@ -130,7 +147,9 @@ class Reagent(ABC):
     def setPotency(self, potency):
         pass
 
-
+"""
+The superpotion class 
+"""
 class SuperPotion(Potion):
     def __init__(self, name, stat, boost,):
         super().__init__(name, stat, boost)
@@ -147,13 +166,13 @@ class SuperPotion(Potion):
         return self.__boost
         
     def setBoost(self, boost):
-        pass 
+        self.__boost += boost 
 
     Boost = property(getBoost, setBoost)
 
+    """ The calculateBoost method in SuperPoiton inherits the method from the abstract class in Potion which --- and returns boost rounded to two decimal places"""
 
     def calculateBoost(self, herb_potency, catalyst_potency, catalyst_quality):
-        # Calculatd  the boost for SuperPotion
         boost = herb_potency + (catalyst_potency * catalyst_quality) * 1.5
         return round(boost, 2)  
 
@@ -167,7 +186,10 @@ class SuperPotion(Potion):
     
     Catalayst = property(getCatalyst)
 
+"""
+The Extreme Potion class does 
 
+"""
 class ExtremePotion(Potion):
     def __init__(self, name, stat, boost, ):
         super().__init__(name, stat, boost)
@@ -184,10 +206,12 @@ class ExtremePotion(Potion):
         return self.__boost
         
     def setBoost(self, boost):
-        pass 
+        self.__boost += boost
 
     Boost = property(getBoost, setBoost)
 
+    """ The calculateBoost method in ExtremePoiton inherits from the abstract class in Potion which  and returns boost rounded to two decimal places"""
+    
     def calculateBoost(self, reagent_potency, super_potion_boost):
         boost = (reagent_potency * super_potion_boost) * 3.0
         return round(boost, 2)  
@@ -197,7 +221,8 @@ class ExtremePotion(Potion):
     
     def getPotion(self):
         return self.__potion
-    
+
+""" The Herb class """
 
 class Herb(Reagent):
     def __init__(self, name, potency):
@@ -215,11 +240,12 @@ class Herb(Reagent):
 
     reagent_potency = property(getPotency, setPotency)
 
+    """  The refine method in the Herb class inherits from the abstract class reagent  which multiplies the potency to 2.5 an sets grimy to False"""
+   
     def refine(self):
         self.__potency *= 2.5  
         self.__grimy = False 
         print(f"{self.__name} has been refined. New potency: {self.__potency}. It's no longer grimy.")
-
 
     def getGrimy(self):
         return self.__grimy
@@ -231,11 +257,16 @@ class Herb(Reagent):
 
     Grimy = property(getGrimy, setGrimy)
 
+
+"""
+The catalyst class
+
+"""
+
 class Catalyst(Reagent):
     def __init__(self, name, potency, quality ):
         super().__init__(name, potency)
         self.__quality = quality
-
 
     def getName(self):     
         return self.__name
@@ -250,6 +281,7 @@ class Catalyst(Reagent):
 
     reagent_potency = property(getPotency, setPotency)
 
+    """  The refine method in the Catalyst class inherits from the abstract class reagent which if quality less then 8.9 increases it by 10 otherwise if it is equal or greater then 8.9 return the quality as 10 the potency to 2.5 an sets grimy to False"""
 
     def refine(self):
         if self.__quality < 8.9:
@@ -258,7 +290,6 @@ class Catalyst(Reagent):
         else:
             self.__quality = 10
             print(f"{self.__name} quality is set to maximum (10). It cannot be refined any further.")
-
 
     def getQuality(self):
         return self.__quality
