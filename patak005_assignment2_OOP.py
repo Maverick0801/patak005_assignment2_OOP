@@ -41,19 +41,22 @@ class Alchemist:
 
     def getRecipes(self):
         return self.__recipes
+    
+
+    "This is the second step that the Alchemist performs in the laboratory which is carrying out the mixPotion() and the potion is removed from the self.__potion list because the potion has been mixed "
 
     def mixPotion(self, recipes):
         pass 
 
+    " After The potion has been mixed the next step is drinking the potion"
     def drinkPotion(self, potion):
         pass
 
 
-    """ This is the first step that the Alchemist triggers and performs in the laboratry"""
+    """ This is the first step that the Alchemist triggers and performs in the laboratry """
 
     def collectReagents(self, reagent, amount):  
        self.__laboratory.addReagent(reagent, amount)
-       self.__potions.append(reagent)
 
     """ This is the last step that the Alchemist triggers """
 
@@ -86,7 +89,7 @@ class Laboratory:
 
 
 
-    """ The addReafent method does this """
+    " The addReafent method is resposnible in appending the self.__herbs and self.__catalyst lists which are defined in the initializer. It checks whether the reagent is part of the Herb or Catalyst class and based on that it puts them in the specific list by using isinstance() but before appending them to their respective this the amount of potency is set to both the herb and the catalyst "
 
     def addReagent(self, reagent, amount):
         if isinstance(reagent, Herb):
@@ -98,7 +101,7 @@ class Laboratory:
     
 
 """
-Thw potion class is abstract class 
+The potion class is abstract class 
 
 """
 
@@ -177,10 +180,10 @@ class SuperPotion(Potion):
 
     Boost = property(getBoost, setBoost)
 
-    """ The calculateBoost method in SuperPoiton inherits the method from the abstract class in Potion which --- and returns boost rounded to two decimal places"""
+    """ The calculateBoost method in SuperPoiton inherits the method from the abstract class in Potion which takes in 3 parameters - herbsPotency, catalystPotency, and catalystQuality and performs the calculation as provided in the assignment specification and returns boost rounded to two decimal places"""
 
-    def calculateBoost(self, herb_potency, catalyst_potency, catalyst_quality):
-        boost = herb_potency + (catalyst_potency * catalyst_quality) * 1.5
+    def calculateBoost(self, herbPotency, catalystPotency, catalystQuality):
+        boost = herbPotency + (catalystPotency * catalystQuality) * 1.5
         return round(boost, 2)  
 
     def getHerb(self):
@@ -217,10 +220,10 @@ class ExtremePotion(Potion):
 
     Boost = property(getBoost, setBoost)
 
-    """ The calculateBoost method in ExtremePoiton inherits from the abstract class in Potion which  and returns boost rounded to two decimal places"""
+    """ The calculateBoost method in ExtremePoiton inherits from the abstract class in Potion which takes reagentPotency and potionBoost as paramters and performs the calculation as provided by assignment specification. It further enhances the boost by multiplying it by 3 and it is rounded to 2  decimal places"""
     
-    def calculateBoost(self, reagent_potency, super_potion_boost):
-        boost = (reagent_potency * super_potion_boost) * 3.0
+    def calculateBoost(self, reagentPotency, potionBoost):
+        boost = (reagentPotency * potionBoost) * 3.0
         return round(boost, 2)  
 
     def getReagent(self):
@@ -247,7 +250,7 @@ class Herb(Reagent):
 
     reagent_potency = property(getPotency, setPotency)
 
-    """  The refine method in the Herb class inherits from the abstract class reagent  which multiplies the potency to 2.5 an sets grimy to False"""
+    " The refine method in the Herb class inherits from the abstract class reagent. The method enhances the potency of the herb when it is called by 2.5 times. Secondly, it sets grimmy = False, indicating us that the herb is now refined and doesn't have any grime "
    
     def refine(self):
         self.__potency *= 2.5  
@@ -286,7 +289,7 @@ class Catalyst(Reagent):
 
     reagent_potency = property(getPotency, setPotency)
 
-    """  The refine method in the Catalyst class inherits from the abstract class reagent which if quality less then 8.9 increases it by 10 otherwise if it is equal or greater then 8.9 return the quality as 10 the potency to 2.5 an sets grimy to False"""
+    "  The refine method in the Catalyst class inherits from the abstract class reagent which refines the quality if it is less then 8.9 if it is equal or greater then 8.9 it sets the quanitity to 10 quality less then 8.9 increases it by 10 otherwise if it is equal or greater then 8.9 return or sets the quality as 10 "
 
     def refine(self):
         if self.__quality < 8.9:
@@ -294,7 +297,7 @@ class Catalyst(Reagent):
             print(f"{self.__name}'s quality has been increased to {self.__quality}.")
         else:
             self.__quality = 10
-            print(f"{self.__name} quality is set to maximum (10). It cannot be refined any further.")
+            print(f"{self.__name} quality is set to 10. It cannot be refined any further.")
 
     def getQuality(self):
         return self.__quality
