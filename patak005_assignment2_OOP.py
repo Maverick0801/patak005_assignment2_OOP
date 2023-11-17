@@ -9,7 +9,8 @@ from abc import ABC, abstractmethod
 
 """
 The alchemist class orchestrates and is responsible for collecting the reagents, mixing the potions, and drinking the potions, it does all of this in the laboratory and it has a composition relationship which is shown in the initializer # self.__laboratory = Laboratory()
-The recipe dictionary is already provided in the assignment specification and all of the attributes from attack to necromacy are values between 0 and 100. The alchemists first collects the reagents and add them to the respective list, it then mixes the potion and potion is removed from the list and then it drinks the potion and attributes such as self.__attack is changed. This is hardcoded a bit in the drink potion() method
+The recipe dictionary is already provided in the assignment specification and all of the attributes from attack to necromacy are values between 0 and 100. The alchemists first collects the reagents and add them to the respective list, it then mixes the potion and potion is removed from the list and then it drinks the potion and attributes such as self.__attack is changed. 
+This is hardcoded a bit in the drink potion() method and at last it refines the reagents. Basically orchestrating the whole game by requesting the herbs, reagents and carrying out lal of these 4 respective functions in the laboratory.
 """
 class Alchemist:
     def __init__(self):
@@ -71,7 +72,9 @@ class Alchemist:
             catalyst.refine()
 
 """"
- The laboratory class
+ Throughout the whole Alchemy Game, the Laboratory class serves as a container for the reagents, potions, and interactions between them. It cannot exist without the Alchemist class, so if instance of alchemist class is deleted this also is deleted due to the composition relationship it shares. It has 3 lists stored in its attributes and it has aggregation relationship shown to store the herbs and catalyst respectively in their specific lists. It contains lists of herbs, potions, and catalysts. The class methods handle adding reagents (addReagent), mixing potions (mixPotions), and assisting in reagent refinement (refine). 
+ Together, these movements imitate an alchemist's mixing station for potions.
+ 
  """
 
 class Laboratory:
