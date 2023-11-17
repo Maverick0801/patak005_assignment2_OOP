@@ -46,6 +46,9 @@ class Alchemist:
 
     def mixPotion(self, recipes):
         pass
+    ## recipe = self.__recipes.get(potion_name)
+       # if recipe:
+         #   self.__laboratory.mixPotions(recipe[0], recipe[1]) 
 
     def drinkPotion(self, potion):
         pass
@@ -185,8 +188,9 @@ class ExtremePotion(Potion):
 
     Boost = property(getBoost, setBoost)
 
-    def calculateBoost(self):
-        pass
+    def calculateBoost(self, reagent_potency, super_potion_boost):
+        boost = (reagent_potency * super_potion_boost) * 3.0
+        return round(boost, 2)  
 
     def getReagent(self):
         return self.__reagent
@@ -211,9 +215,10 @@ class Herb(Reagent):
 
     reagent_potency = property(getPotency, setPotency)
 
-
     def refine(self):
-        pass
+        self.__potency *= 2.5  
+        self.__grimy = False 
+        print(f"{self.__name} has been refined. New potency: {self.__potency}. It's no longer grimy.")
 
 
     def getGrimy(self):
@@ -247,15 +252,22 @@ class Catalyst(Reagent):
 
 
     def refine(self):
-        pass
+        if self.__quality < 8.9:
+            self.__quality += 1.1
+            print(f"{self.__name}'s quality has been increased to {self.__quality}.")
+        else:
+            self.__quality = 10
+            print(f"{self.__name} quality is set to maximum (10). It cannot be refined any further.")
 
 
     def getQuality(self):
         return self.__quality
-    
 
 
 
+"""
+That cuminates all the main code, below here is a small output generated. Objects have been defined as mentioned in the assignmnet specification and I have produced a small output code a the end as well
+"""
 
 # I have defined all the herb objects as given in the assignment specification 
 arbuck = Herb("Arbuck", 2.6)
@@ -279,8 +291,7 @@ grenwall_spike = Catalyst("Grenwall Spike", 6.3, 4.9)
 ground_miasma_rune = Catalyst("Ground Miasma Rune", 3.3, 5.2)
 
 
-
-########### I have created a small output code of how the Alchemist Game runs
+""" I have created a small output code of how the Alchemist Game runs """
 
 ## first creating a instance in alchemist class.
 alchemist = Alchemist()
